@@ -1,0 +1,104 @@
+.input{
+
+    height:60px ;
+    flex-grow: 1;
+    border:"transparent"   ;
+    background-color:"#fff"  ; 
+    color:'#000' ;
+    font-size:16   ; 
+    font-weight:500  ;
+    padding: 0px 15px  ;
+    border: none;
+  
+    
+}
+
+.input:focus{
+    outline: 0;
+
+}
+
+.recherche
+{
+    flex-grow: 2;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    transform: translate();
+    border-bottom: 2px solid transparent;
+    background-color: #fff;
+}
+
+.recherche:hover  {
+    border-bottom: 2px solid black;
+
+}
+
+
+.recherche:focus{
+    border-bottom: 2px solid black;
+
+}
+
+option{
+ 
+    padding: 25px 0px;
+ }
+
+
+
+/* ce qui viens a partir d ici estt le style pour le champ de texte qui ce trouve sur la barre de menu*/
+
+.inputMenu
+{
+    height: 55px ;
+  
+    border:"transparent"   ;
+    background-color:"#fff"  ; 
+    color:'#000' ;
+    font-size:14   ; 
+    font-weight:500  ;
+    padding: 0px 15px  ;
+    border: none;
+    background-color: #f1f1f1;
+
+    width: 70% !important;
+
+}
+
+
+.inputMenu:focus{
+    outline: 0;       
+  }
+
+.rechercheMenu{
+    height: 55px;
+    display: flex;
+    width: 85% !important;
+    flex-direction:row;
+    align-items: center;
+    transform: translate();
+    border: 2px solid #fff ;
+    padding: 0px 0px  0px 15px;
+    justify-content: center;
+   
+}
+.rechercheMenu RoomIcon {
+    background-color: turquoise !important;
+}
+
+
+
+
+.bouton {
+
+
+    width: 120px;
+    height: 60px;
+
+    
+}
+
+.bouton:focus{
+    box-shadow: transparent;
+}

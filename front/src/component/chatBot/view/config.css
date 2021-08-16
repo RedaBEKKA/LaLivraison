@@ -1,0 +1,124 @@
+ .react-chatbot-kit-chat-container {
+    width: 320px;
+    height: 500px;
+    
+} 
+
+.react-chatbot-kit-chat-header {
+    width: 320px ; 
+    height: 50px;
+    border-top-right-radius: 15px; 
+    border-top-left-radius: 15px; 
+    
+    color: white;
+    font-size: 1.1em ; 
+    background-color: #e32929;
+    
+    }
+
+    
+.react-chatbot-kit-user-chat-message {
+    
+    min-width: 10%;
+    width:auto  ; 
+    max-width: 65%; 
+    height: auto;
+    border-radius: 10px;   
+    word-break: break-all;
+    padding-left:  5px;
+    padding-right: 5px;
+
+}
+
+.react-chatbot-kit-chat-bot-message{
+    min-width: 10%;
+    width:auto  ; 
+    max-width: 65%; 
+    height: auto;
+
+    color: whitesmoke;
+    border-radius: 10px;   
+    word-break: break-all;
+
+  
+}
+
+.react-chatbot-kit-chat-bot-avatar{
+
+  
+}
+.react-chatbot-kit-chat-bot-avatar-letter{
+margin-top: 10px;
+}
+/*
+.react-chatbot-kit-chat-inner-container {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+
+    
+    
+
+}
+
+.react-chatbot-kit-chat-message-container {
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y:scroll;
+    padding-bottom: 10px;
+    height: 75%;
+
+}
+
+
+
+
+
+.react-chatbot-kit-chat-inner-container {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+
+    
+    
+
+}
+
+
+
+
+.react-chatbot-kit-user-chat-message {
+
+    background-color: #29c224;
+    width: 65%; 
+    height: auto;
+
+    color: whitesmoke;
+    border-radius: 10px;   
+    word-break: break-all;
+    padding-left:  5px;
+    padding-right: 5px;
+}
+
+.react-chatbot-kit-chat-bot-message{
+    width: 65%; 
+    height: auto;
+
+    color: whitesmoke;
+    border-radius: 10px;   
+    word-break: break-all;
+    padding-left:  5px;
+    padding-right: 5px;
+    margin-left: 10px;
+}
+*/
+
+.react-chatbot-kit-chat-input:focus {
+    outline: 0;
+}
+
+.react-chatbot-kit-chat-btn-send{
+    outline: 0;
+    background-color: #e32929;
+
+} 

@@ -1,0 +1,103 @@
+
+ul{
+    transform: translateY(35%) !important;
+
+}
+
+li{
+    list-style: none;
+    margin: 15px !important;
+    position: relative ; 
+} 
+.lien{
+
+    text-decoration: none;
+    font-size: 1em;
+    
+    color: rgba(0,0,0,0.8);
+    padding: 0px 0px;
+    align-self: flex-start;
+    margin: 10px 0px !important;
+}
+
+ .lien:hover{
+
+    
+   color: rgb(66,66,78);
+    display: block;
+    width: 100%;
+    height: inherit ;
+    transform:scale(1.1) ;
+    text-decoration: none !important;
+
+    
+}
+
+
+.lien::before{
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 5px;
+    width: 0%;
+    height: 10%;
+    background-color: rgba(0 ,0,0,0.7);
+    border-radius: 50px;
+    z-index: 10;
+    filter: blur(50%);
+    transition:  0.5s !important;
+}
+
+
+
+.lien:hover::before{
+
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 5px;
+    width: 60%;
+    height: 10%;
+    background-color: rgba(0 ,0,0,0.7);
+    border-radius: 50px;
+    z-index: 10;
+    filter: blur(50%);
+} 
+
+
+
+.recherche:hover{
+    border-bottom: transparent;
+}
+
+
+
+
+
+p{ 
+     color: white; font-size: 1.2em;
+}
+
+.span{
+     color: #e32929;
+     font-weight: 700;
+     font-size: 25px ;
+     
+ }
+
+ #champTextContainer{ width: 45%; }
+ 
+
+ @media (max-width: 800px) {  /* Small */
+ 
+    #champTextContainer
+    { display: none;}
+
+
+}
+
+.nomAppBlack{color: black;}
+.nomApp{color: white;}
+
+
+    

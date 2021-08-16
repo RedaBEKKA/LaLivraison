@@ -1,0 +1,6 @@
+Header (Logo + menu + Se connecter + (FR,EN))
+Banniére (Slide + Barre de recherche)
+A propos de nous
+Nos services 
+Télécharger l'application
+ChatBot
