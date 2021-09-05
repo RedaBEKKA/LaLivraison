@@ -121,7 +121,7 @@ const ShinBarreMenu = ({}) => {
   const logout = () => {
     dispatch({ type: "LOGOUT" });
 
-    history.push("/");
+    history.push("/"); 
 
     setUser(null);
   };
@@ -135,7 +135,7 @@ const ShinBarreMenu = ({}) => {
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
 
-    setUser(JSON.parse(localStorage.getItem("profile")));
+    setUser(JSON.parse(local.getItem("profile")));
   }, [location]);
 
   return (

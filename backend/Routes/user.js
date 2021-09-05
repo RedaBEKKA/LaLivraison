@@ -1,13 +1,16 @@
 const express = require('express') ; 
 const router = express.Router() ; 
+const {auth} = require('../middleware/auth')
 
-const controllers = require("../controllers/user") ; 
+const userController = require("../controllers/user") ; 
 
-
-
-
-router.post('/sign',controllers.inscrireUser) ; 
-router.post('/auth',controllers.authentifier)  ; 
+router.post('/sign',userController.inscrireUser) ; 
+router.post('/auth',userController.authentifier)  ; 
+router.post('/activation',userController.activateEmail)  ; 
+router.post('/refresh_token',userController.getAccessToken)  ; 
+router.post('/forgot',userController.forgotPassword)  ; 
+router.post('/reset', userController.resetPassword )  ; 
+router.get('/info', userController.getUserInfor )  ; 
 
 
 
