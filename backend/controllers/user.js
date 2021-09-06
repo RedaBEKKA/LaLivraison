@@ -134,11 +134,12 @@ const userController = {
 
       const refresh_token = createRefreshToken({ id: userEmail._id })
       let options = {
-        path: "/user/refresh_token",
+        path: '/user/refreshtoken',
         sameSite: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,// 7 days
         httpOnly: true, // The cookie only accessible by the web server
       }
+      console.log(`refresh_token`, refresh_token)
       res.cookie('x-access-token', refresh_token, options)
 
 
@@ -151,9 +152,9 @@ const userController = {
   },
   getAccessToken: (req, res) => {
     try {
-      const rf_token = req.cookies['x-access-token']
-      if (!rf_token) return res.status(400).json({ msg: "Please login now!" })
+      const rf_token = req.cookies['x-access-token'];
       console.log(`rf_token`, rf_token)
+      if (!rf_token) return res.status(400).json({ msg: "no. token Please login now !" })
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.status(400).json({ msg: "Please login now!" })
@@ -217,23 +218,23 @@ const userController = {
   },
   resetPassword: async (req, res) => {
     try {
-      
+
       const { motDePasse } = req.body
       console.log(motDePasse)
-      
+
       const passwordHash = await bcrypt.hash(motDePasse, 12)
       const token = req.headers['x-access-token']
-      console.log(`req params`,token)
+      console.log(`req params`, token)
 
-      decodeData = jwt.verify(token , process.env.ACCESS_TOKEN)
-      req.userId = decodeData?.id ;
+      decodeData = jwt.verify(token, process.env.ACCESS_TOKEN)
+      req.userId = decodeData?.id;
 
       //console.log(`ruser.ids`, {id :user.id})
-      await Client.findOneAndUpdate(req.userId , {
+      await Client.findOneAndUpdate(req.userId, {
         motDePasse: passwordHash
       })
 
-       res.json({ msg: "Password successfully changed!" })
+      res.json({ msg: "Password successfully changed!" })
     } catch (err) {
       return res.status(500).json({ msg: err.message })
     }
@@ -241,20 +242,69 @@ const userController = {
   getUserInfor: async (req, res) => {
     try {
       const token = req.headers['x-access-token']
-      console.log(`req params`,token)
+      console.log(`req params`, token)
 
-      decodeData = jwt.verify(token , process.env.ACCESS_TOKEN)
-      req.userId = decodeData?.id ;
+      decodeData = jwt.verify(token, process.env.ACCESS_TOKEN)
+      req.userId = decodeData?.id;
 
-        const user = await Client.findById(req.userId).select('-password')
+      const user = await Client.findById(req.userId).select('-password')
 
-        res.json(user)
+      res.json(user)
     } catch (err) {
-        return res.status(500).json({msg: err.message})
+      return res.status(500).json({ msg: err.message })
     }
-},
+  },
+  getUsersAllInfor: async (req, res) => {
+    try {
+      const users = await Client.find().select('-password')
 
+      res.json(users)
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  logout: async (req, res) => {
+    try {
+      res.clearCookie('x-access-token', { path: '/user/refreshtoken' })
+      return res.json({ msg: "Logged out." })
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  updateUser: async (req, res) => {
+    try {
+      const { fullName, avatar } = req.body
+      await Client.findOneAndUpdate({ _id: req.user.id }, {
+        fullName, avatar
+      })
 
+      res.json({ msg: "Update Success!" })
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  updateUsersRole: async (req, res) => {
+    try {
+      const { role } = req.body
+
+      await Client.findOneAndUpdate({ _id: req.params.id }, {
+        role
+      })
+
+      res.json({ msg: "Update Success!" })
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
+  deleteUser: async (req, res) => {
+    try {
+      await Client.findByIdAndDelete(req.params.id)
+
+      res.json({ msg: "Deleted Success!" })
+    } catch (err) {
+      return res.status(500).json({ msg: err.message })
+    }
+  },
 
 
 }

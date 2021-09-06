@@ -1,14 +1,18 @@
 const  userModel  = require('../models/schemaUser')
 
-module.exports = function  async(req,res,next){
+const authAdmin = async (req, res, next) => {
+    try {
+        const user = await userModel.findOne(req.user.role)
+        console.log(user)
+        if(user.role !== 1) 
+            return res.status(500).json({msg: "Accès aux ressources d'administration refusé."})
 
- if (req.userModel.isAdmin){
-     console.log(req.userModel.isAdmin)
-     return res.status(403).send("not admin")
- }
- next()
+        next()
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+
+
 }
 
-
-
-
+module.exports = authAdmin
