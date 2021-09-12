@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* ----------------- Auth ------------------- */
+
+
+@import url("../src/component/auth/auth.css");

@@ -53,8 +53,6 @@ const Formulaire = () => {
   },[seConnecter])
 
 
-
-
   // functions
   const handelChange = (e) => {
     switch (e.target.name) {
@@ -158,6 +156,7 @@ const Formulaire = () => {
       }
     }
   };
+
   const handelClassChanges = () => {
     if (slideClass === null) {
       setSlideClass(classes.sliderAnimatedLeftToRight);
@@ -179,7 +178,7 @@ const Formulaire = () => {
       <div className={`${classes.slider} ${slideClass}`}>
         <div className={classes.slideText}>
           <h2> {seConnecter ? "Bienvenue" : "Comment vas-tu"}</h2>
-          <p>
+          <p className={classes.TextP} >
             {seConnecter
               ? "venez avec nous en enfer et cree un compte "
               : "vous etes deja inscrit , alors connectez vous "}
@@ -206,7 +205,7 @@ const Formulaire = () => {
             {!seConnecter && (
               <NewInput
                 name="fullName"
-                label="full Name"
+                label="   full Name"
                 handelChange={handelChange}
                 type="text"
                 error={nomError}
@@ -216,7 +215,7 @@ const Formulaire = () => {
             )}
             <NewInput
               name="telephone"
-              label="Telephone"
+              label="   Email"
               handelChange={handelChange}
               type="text"
               error={telError}
@@ -226,7 +225,7 @@ const Formulaire = () => {
             <div className={classes.forgotPassword}>
               <NewInput
                 name="motDePasse"
-                label="Mot de passe "
+                label="   Mot de passe "
                 handelChange={handelChange}
                 error={mdpError}
                 type="password"
@@ -241,11 +240,13 @@ const Formulaire = () => {
                   style={{
                     fontSize: "11",
                     color: "black",
-                    background: "transparent",
+                    background: "#fff",
                     marginTop: "5px",
-                    margin: " 0px auto",
-                    borderRadius: "10px",
+                    padding: 5,
+                    borderRadius: "8px",
                     transform: "translateY(5px)",
+                 
+               
                   }}
                 >
                   mot de passe oublié
@@ -256,7 +257,7 @@ const Formulaire = () => {
               <div className={classes.confirmMdp}>
                 <NewInput
                   name="confirmedPassword"
-                  label="Confirmation mot de passe"
+                  label="   Confirmation mot de passe"
                   type="password"
                   handelChange={handelChange}
                   error={confirmMdpError}
@@ -267,7 +268,7 @@ const Formulaire = () => {
             )}
           </div>
           <Button variant="contained" className={classes.bouton} type="submit">
-            Send
+            Envoyer
           </Button>
         </form>
          

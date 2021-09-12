@@ -130,7 +130,7 @@ const userController = {
         motDePasse,
         userEmail.motDePasse
       );
-      if (!isMatch) return res.status(400).json({ msg: "Password is incorrect." })
+      if (!isMatch) return res.status(400).json({ msg: "Le mot de passe est incorrect." })
 
       const refresh_token = createRefreshToken({ id: userEmail._id })
       let options = {
@@ -144,7 +144,7 @@ const userController = {
 
 
       console.log(`userEmail`, userEmail)
-      res.json({ msg: "Login success!" })
+      res.json({ msg: "Connexion réussie" })
 
     } catch (error) {
       console.log(error);

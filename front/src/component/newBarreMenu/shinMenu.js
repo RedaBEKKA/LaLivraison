@@ -125,7 +125,7 @@ const ShinMenu = ({ nomLogo, user, Logout }) => {
                                 <li><a href='otherPages/contact.html' className='lien'>Contact</a></li>
                                 <li><a href='otherPages/blog.html' className='lien'>Blog</a></li>
 
-                                {!user.isAdmin ? <li><a href='/admin' className='lien'>Dashboard</a></li> : null}
+                                {/* {!user.isAdmin ? <li><a href='/admin' className='lien'>Dashboard</a></li> : null} */}
 
                             </ul>
                         </div>

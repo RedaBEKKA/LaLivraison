@@ -9,10 +9,11 @@ import {Provider} from 'react-redux'   ;
 import{compose ,createStore, applyMiddleware} from 'redux'  ; 
 import thunk from 'redux-thunk'
 import reducers from './redux/reducers/index'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(reducers , compose(applyMiddleware(thunk))) ; 
+const store = createStore(reducers , composeWithDevTools(applyMiddleware(thunk))) ; 
 
-
+// , compose(applyMiddleware(thunk))
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

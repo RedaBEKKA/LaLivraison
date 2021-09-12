@@ -47,9 +47,16 @@ export const authentifierAction = (donnee, history) => async (dispatch) => {
   }
 };
 
-export const logoutAction = (history) => async (dispatch) => {
-  console.log("logoutAction");
-  localStorage.clear();
-  dispatch({ type: "LOGOUT" });
-  history.push("/");
-};
+// export const logoutAction = (history) => async (dispatch) => {
+//   console.log("logoutAction");
+//   localStorage.clear();
+//   dispatch({ type: "LOGOUT" });
+//   history.push("/");
+// };
+
+
+// export const dispatchLogin = () => {
+//   return {
+//       type: ACTIONS.LOGIN
+//   }
+// }

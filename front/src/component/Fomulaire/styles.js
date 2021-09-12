@@ -45,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
     height: 550, minHeight:'550' , 
     width: 900,
     margin: "auto",
+    marginTop:50,
+    padding: 1,
     display: "flex",
     flexDirection: "row",
     backgroundColor: '#f1f1f1',
@@ -96,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
+  },
+  TextP:{
+    margin:10
   },
 ///////////////////////////////////////
 
