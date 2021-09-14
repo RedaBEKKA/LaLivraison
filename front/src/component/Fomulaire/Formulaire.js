@@ -137,24 +137,24 @@ const Formulaire = () => {
 
     let result = telOk && nomOk && mdpOk && confirmMdpOk;
 
-    if (result) {
-      setErrorServer(true)
-      if (seConnecter) {
-        dispatch(
-          authentifierAction(
-            {
-              telephone: informations.telephone,
-              motDePasse: informations.motDePasse,
-            },
-            history
-          )
-        );
-      } else {
-        dispatch(
-          inscrireAction({ ...informations, dateCreation: new Date() }, history)
-        );
-      }
-    }
+    // if (result) {
+    //   setErrorServer(true)
+    //   if (seConnecter) {
+    //     dispatch(
+    //       authentifierAction(
+    //         {
+    //           telephone: informations.telephone,
+    //           motDePasse: informations.motDePasse,
+    //         },
+    //         history
+    //       )
+    //     );
+    //   } else {
+    //     dispatch(
+    //       inscrireAction({ ...informations, dateCreation: new Date() }, history)
+    //     );
+    //   }
+    // }
   };
 
   const handelClassChanges = () => {

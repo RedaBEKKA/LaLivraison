@@ -38,7 +38,7 @@
     margin-right: 10px;
 }
 .login_page p{
-    margin: 10px 0;
+    margin: 10px 0;color: #111;
 }
 .login_page a{
     color: #111;
@@ -76,4 +76,7 @@
     letter-spacing: 1.3px;
     border-radius: 3px;
     margin-top: 15px;
+}
+.container{
+    margin-top:100px ;
 }

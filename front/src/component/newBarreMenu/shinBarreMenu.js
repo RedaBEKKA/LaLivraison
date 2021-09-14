@@ -2,6 +2,8 @@ import BoutonSignUp from "../newBarreMenu/BoutonSignUp";
 import "./menu.css";
 import Search from "../BarreDeRecherche/Search";
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import {
   AppBar,
   useMediaQuery,
@@ -13,9 +15,11 @@ import {
 } from "@material-ui/core";
 import ShinMenu from "./shinMenu";
 
-import { useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux"; 
 import decode from "jwt-decode";
+import { dispatchLogin,fetchUser,dispatchGetUser } from '../../redux/actions/authAction'
+
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -69,26 +73,30 @@ const useStyles = makeStyles((theme) => {
       },
     },
 
-    nom_profil:{
-       
-      marginLeft:'15px' ,
-      color:'red' , 
-     
-      [theme.breakpoints.down("sm")]: {
-        fontSize:'14px' ,   
-      color:'black'    },
+    nom_profil: {
 
-    } , 
+      marginLeft: '15px',
+      color: 'red',
+
+      [theme.breakpoints.down("sm")]: {
+        fontSize: '14px',
+        color: 'black'
+      },
+
+    },
   };
 });
 
-const ShinBarreMenu = ({}) => {
+
+
+const ShinBarreMenu = ({ }) => {
   const classes = useStyles();
   const [fadeAnimation, setFadeAnimation] = useState(false);
   const [animateChampText, setAnimateChampText] = useState(false);
   const [animateAppBar, setAnimateAppBar] = useState(classes.vide);
   const [nomLogo, setNomLogo] = useState("nomApp");
   const mediaquery = useMediaQuery("(max-width:600px)");
+
 
   const scroller = () => {
     if (window.pageYOffset > 50) {
@@ -110,41 +118,88 @@ const ShinBarreMenu = ({}) => {
       setAnimateChampText(false);
     }
   };
-
   window.addEventListener("scroll", scroller);
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const dispatch = useDispatch();
-  const location = useLocation();
+  const dispatch = useDispatch()
+  const auth = useSelector(state => state.auth)
+  const token = useSelector(state => state.token)
+
+  console.log(`auth`, auth)
+  const { user, isLogged } = auth
+
   const history = useHistory();
+  const location = useLocation();
+
+
+  const [User, setUser] = useState(JSON.parse(localStorage.getItem("firstLogin")));
+  
+  
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
 
-    history.push("/"); 
+    history.push("/");
 
     setUser(null);
   };
 
+  
   useEffect(() => {
-    const token = user?.token;
-
-    if (token) {
-      const decodedToken = decode(token);
-
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    const firstLogin = localStorage.getItem('firstLogin')
+    if(firstLogin){
+      const getToken = async () => {
+        const res = await axios.post('/user/refreshtoken', null)
+        console.log(`res`, res)
+         dispatch({type: 'GET_TOKEN', payload: res.data.access_token})
+      }
+      getToken()
     }
+  },[auth.isLogged, dispatch])
+  
+  useEffect(() => {
+    if(token){
+      const getUser = () => {
+        dispatch(dispatchLogin())
 
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+        return fetchUser(token).then(res => {
+          dispatch(dispatchGetUser(res))
+        })
+      }
+      getUser()
+    }
+  },[token, dispatch])
 
+  // useEffect(() => {
+  //   const token = User?.token;
+
+  //   if (token) {
+  //     const decodedToken = decode(token);
+
+  //     if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+  //   }
+
+  //   setUser(JSON.parse(localStorage.getItem("profile")));
+  // }, [location]);
+  const userLink = () => {
+    return (
+
+      <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', width: 'auto' }}>
+        <li>
+          <Link to='/'>
+            <img src={user.avatar} alt='' /> {user.name}
+          </Link>
+        </li>
+      </div>
+
+    )
+  }
   return (
     <AppBar
       className={`${animateAppBar} ${classes.appBarInitial} `}
       elevation={0}
     >
       <Toolbar className={classes.menuBarre}>
-        <ShinMenu nomLogo={nomLogo}  user={user} Logout={logout}/>
+        <ShinMenu nomLogo={nomLogo} User={User} Logout={logout} />
 
         <div id="champTextContainer">
           {
@@ -154,27 +209,32 @@ const ShinBarreMenu = ({}) => {
           }
         </div>
 
-        {user?.result ? (
-          <div style={{ display: "flex" , flexDirection :'row' , alignItems:'center' , width:'auto' }}>
-            <Avatar
-              className={classes.purple}
-              alt={user?.result.name}
-              src={null}
-            >
-              {user?.result.fullName.charAt(0)}
-            </Avatar>
-            {/* <div className={classes.nom_profil}> {user?.result.fullName} </div> */}
 
-            {mediaquery ? null : (
-              <Button onClick={logout} style={{ backgroundColor: "black" ,color:'white' , marginLeft :'15px' , fontSize:'15px',textTransform:'none'}}>
-                {" "}
-                se deconnecter{" "}
-              </Button>
-            )}
-          </div>
-        ) : (
-          <BoutonSignUp nomClass="signUpBtn" />
-        )}
+        {isLogged ? userLink()
+
+          //  <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', width: 'auto' }}>
+
+          //  </div>
+
+          //   {/* </div> */}
+          //   {/* <Avatar
+          //     className={classes.purple}
+          //     alt={isLogged?.user.name}
+          //     src={null}
+          //   > */}
+          //   {/* {User?.result.fullName.charAt(0)} */}
+          //   {/* </Avatar> */}
+          //   {/* <div className={classes.nom_profil}> {User?.result.fullName} </div> */}
+
+          //   {/* {mediaquery ? null : (
+          //     <Button onClick={logout} style={{ backgroundColor: "black", color: 'white', marginLeft: '15px', fontSize: '15px', textTransform: 'none' }}>
+          //       {" "}
+          //       se deconnecter{" "}
+          //     </Button>
+          //   )} */}
+          : (
+            <BoutonSignUp nomClass="signUpBtn" />
+          )}
       </Toolbar>
     </AppBar>
   );

@@ -5,21 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import theme from './component/theme'
 import { ThemeProvider } from 'react-bootstrap';
-import {Provider} from 'react-redux'   ; 
-import{compose ,createStore, applyMiddleware} from 'redux'  ; 
-import thunk from 'redux-thunk'
-import reducers from './redux/reducers/index'
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const store = createStore(reducers , composeWithDevTools(applyMiddleware(thunk))) ; 
+// import {Provider} from 'react-redux'   ; 
+// import{compose ,createStore, applyMiddleware} from 'redux'  ; 
+// import thunk from 'redux-thunk'
+// import reducers from './redux/reducers/index'
+// import { composeWithDevTools } from 'redux-devtools-extension';
+import DataProvider from './../src/redux/store'
+// const store = createStore(reducers , composeWithDevTools(applyMiddleware(thunk))) ; 
 
 // , compose(applyMiddleware(thunk))
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <Provider store={store}>
+
+    <DataProvider >
     <App />
-    </Provider>
+    </DataProvider>
+
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

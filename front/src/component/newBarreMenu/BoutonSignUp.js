@@ -4,6 +4,7 @@ import {Fade  } from "@material-ui/core";
 import Formulaire from "../Fomulaire/Formulaire";
 
 import "./menu.css";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -65,12 +66,15 @@ const SignUpBtn = ({ nomClass }) => {
   const [FadeEnter, setFadeEnter] = useState(false);
 
  
+  const history = useHistory()
 
 
 
   const handelSignUpClick = () => {
-    setShowLogin(!showLogin);
-    setFadeEnter(true);
+    // setShowLogin(!showLogin);
+    // setFadeEnter(true);
+    history.push("/connexion")
+
   };
   const handelCloseLogin = () => {
     setTimeout(() => {
@@ -98,7 +102,7 @@ const SignUpBtn = ({ nomClass }) => {
             className={showLogin ? classes.formContainer : classes.formClosed}
           >
           
-            <Formulaire />
+            {/* <Formulaire /> */}
             <Button onClick={handelCloseLogin} className={classes.closeBtnForm}>
               X
             </Button>

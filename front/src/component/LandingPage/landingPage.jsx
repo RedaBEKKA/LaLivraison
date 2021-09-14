@@ -8,6 +8,7 @@ import SectionPartenaires from "../partenaire/SectionPartenaires";
 import DownloadMobile from "../downloadMobile/DownloadMobile";
 import BarreDeRecherche from "../BarreDeRecherche/BarreRecherche";
 import Footer from "../footer/Footer";
+import {useDispatch, useSelector} from 'react-redux'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => {
 });
 
 function LandingPage() {
+
   const classes = useStyles();
   return (
     <div style={{ minWidth: 350 }}>

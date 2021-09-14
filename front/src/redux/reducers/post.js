@@ -1,17 +1,17 @@
 
-const postReducer=(postReducer=[],action)=>{
+// const postReducer=(postReducer=[],action)=>{
   
 
-    switch(action.type){
+//     switch(action.type){
   
-      case 'GETALLPOSTS' :   {
-      return action.payload ;  
+//       case 'GETALLPOSTS' :   {
+//       return action.payload ;  
 
-      }
-        default : return postReducer ; 
-    }
-  }
+//       }
+//         default : return postReducer ; 
+//     }
+//   }
   
   
-  export default postReducer ; 
+//   export default postReducer ; 
   
