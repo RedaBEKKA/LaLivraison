@@ -1,0 +1,22 @@
+.container-title-dashborad{
+    background-color: aliceblue;
+    height: 60px;
+   padding-left:80px ;
+
+}
+.container-title-dashborad .container-item{
+    background-color: beige;
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+} 
+.container-title-dashborad .container-item input{
+    width: 70%;
+    height: 40px;
+}
+.container-title-dashborad .container-item .container-btn{
+    width: 25%;display: flex;
+    justify-content: space-around;
+}

@@ -25,7 +25,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+/* ul{
+  padding: 0;
+  margin: 0;
+} */
 .App-link {
   color: #61dafb;
 }
@@ -38,3 +41,12 @@
     transform: rotate(360deg);
   }
 }
+/* ----------------- Auth ------------------- */
+@import url("./component/auth/auth.css");
+
+
+/* sideBare */
+@import url("./component/SideMenu/sideMenue.css");
+/* dashborad */
+/* @import url('./component/dashborad/style.css'); */
+@import url("./component/dashborad/style.css");

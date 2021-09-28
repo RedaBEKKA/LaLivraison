@@ -4,6 +4,7 @@ import Search from "../BarreDeRecherche/Search";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { createTheme } from '@material-ui/core/styles';
 import {
   AppBar,
   useMediaQuery,
@@ -16,9 +17,9 @@ import {
 import ShinMenu from "./shinMenu";
 
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux"; 
+import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
-import { dispatchLogin,fetchUser,dispatchGetUser } from '../../redux/actions/authAction'
+import { dispatchLogin, fetchUser, dispatchGetUser } from '../../redux/actions/authAction'
 
 
 const useStyles = makeStyles((theme) => {
@@ -121,85 +122,84 @@ const ShinBarreMenu = ({ }) => {
   window.addEventListener("scroll", scroller);
 
   const dispatch = useDispatch()
-  const auth = useSelector(state => state.auth)
   const token = useSelector(state => state.token)
 
-  console.log(`auth`, auth)
+  const auth = useSelector(state => state.auth)
+
+  // console.log(`auth`, auth)
+  // console.log(`token auth`, token)
   const { user, isLogged } = auth
 
-  const history = useHistory();
-  const location = useLocation();
 
-
-  const [User, setUser] = useState(JSON.parse(localStorage.getItem("firstLogin")));
-  
-  
-
-  const logout = () => {
-    dispatch({ type: "LOGOUT" });
-
-    history.push("/");
-
-    setUser(null);
-  };
-
-  
-  useEffect(() => {
-    const firstLogin = localStorage.getItem('firstLogin')
-    if(firstLogin){
-      const getToken = async () => {
-        const res = await axios.post('/user/refreshtoken', null)
-        console.log(`res`, res)
-         dispatch({type: 'GET_TOKEN', payload: res.data.access_token})
-      }
-      getToken()
+  const handleLogout = async () => {
+    try {
+        await axios.get('/user/logout')
+        localStorage.removeItem('firstLogin')
+        window.location.href = "/";
+    } catch (err) {
+        window.location.href = "/";
     }
-  },[auth.isLogged, dispatch])
-  
-  useEffect(() => {
-    if(token){
-      const getUser = () => {
-        dispatch(dispatchLogin())
-
-        return fetchUser(token).then(res => {
-          dispatch(dispatchGetUser(res))
-        })
-      }
-      getUser()
-    }
-  },[token, dispatch])
-
-  // useEffect(() => {
-  //   const token = User?.token;
-
-  //   if (token) {
-  //     const decodedToken = decode(token);
-
-  //     if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-  //   }
-
-  //   setUser(JSON.parse(localStorage.getItem("profile")));
-  // }, [location]);
+}
   const userLink = () => {
     return (
 
-      <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', width: 'auto' }}>
+      <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', justifyContent:'center' }}>
         <li>
           <Link to='/'>
-            <img src={user.avatar} alt='' /> {user.name}
+            <img src={user.avatar} alt='' /> {user.fullName}
           </Link>
+        
         </li>
+        <ul className="dropdown" style={{ display: "flex", flexDirection: 'row' }}>
+            <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/"  onClick={handleLogout}  >Logout</Link></li> 
+           
+         </ul>
       </div>
 
     )
   }
+  const history = useHistory();
+  const location = useLocation();
+  useEffect(() => {
+    const firstLogin = localStorage.getItem('firstLogin')
+    if (firstLogin) {
+      const getToken = async () => {
+        const res = await axios.post('/user/refreshtoken', null)
+       // console.log(`res resresresresresresres`, res)
+       // console.log(`token`, token)
+        dispatch({ type: 'GET_TOKEN', payload: res.data.access_token })
+      }
+      getToken()
+    }
+  }, [auth.isLogged, dispatch])
+
+
+  useEffect(() => {
+    if (token) {
+      const getUser = () => {
+        dispatch(dispatchLogin())
+        const res = fetchUser(token).then(res => {
+          dispatch(dispatchGetUser(res));
+        })
+        // console.log(`token 2 fetchUser`, token)
+        // console.log(`res res res res  `, res )        
+      }
+      getUser()
+    }
+  }, [token, dispatch])
+
+
   return (
     <AppBar
       className={`${animateAppBar} ${classes.appBarInitial} `}
       elevation={0}
     >
       <Toolbar className={classes.menuBarre}>
-        <ShinMenu nomLogo={nomLogo} User={User} Logout={logout} />
+        <ShinMenu nomLogo={nomLogo}
+        // User={User} 
+        // Logout={logout} 
+        />
 
         <div id="champTextContainer">
           {
@@ -212,7 +212,58 @@ const ShinBarreMenu = ({ }) => {
 
         {isLogged ? userLink()
 
-          //  <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', width: 'auto' }}>
+
+          : (
+            <BoutonSignUp nomClass="signUpBtn" />
+          )}
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default ShinBarreMenu;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // useEffect(() => {
+  //   const token = User?.token;
+
+  //   if (token) {
+  //     const decodedToken = decode(token);
+
+  //     if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+  //   }
+
+  //   setUser(JSON.parse(localStorage.getItem("profile")));
+  // }, [location]);
+            //  <div style={{ display: "flex", flexDirection: 'row', alignItems: 'center', width: 'auto' }}>
 
           //  </div>
 
@@ -232,12 +283,15 @@ const ShinBarreMenu = ({ }) => {
           //       se deconnecter{" "}
           //     </Button>
           //   )} */}
-          : (
-            <BoutonSignUp nomClass="signUpBtn" />
-          )}
-      </Toolbar>
-    </AppBar>
-  );
-};
 
-export default ShinBarreMenu;
+            // const [User, setUser] = useState(JSON.parse(localStorage.getItem("firstLogin")));
+
+
+
+  // const logout = () => {
+  //   dispatch({ type: "LOGOUT" });
+
+  //   history.push("/");
+
+  //   setUser(null);
+  // };

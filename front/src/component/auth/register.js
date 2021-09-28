@@ -51,7 +51,7 @@ function Register() {
         try {
             const res = await axios.post('/user/inscrire', {fullName, email, motDePasse,telephone})
             console.log(`res`, res)
-            setUser({ ...user, err: '', success: res.data.message })
+            setUser({ ...user, err: '', success: res.data.msg })
             localStorage.setItem('firstLogin', true)
 
         } catch (err) {

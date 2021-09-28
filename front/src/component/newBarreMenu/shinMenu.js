@@ -5,6 +5,8 @@ import React, { useState } from "react"
 import CloseIcon from '@material-ui/icons/Close';
 import './menu.css'
 import BoutonSignUp from "../newBarreMenu/BoutonSignUp";
+import { useSelector } from 'react-redux';
+import SideMenu from '../SideMenu/SideMenuAdmin';
 
 
 
@@ -65,7 +67,9 @@ const useStyles = makeStyles(theme => {
 
 
 
-const ShinMenu = ({ nomLogo, user, Logout }) => {
+const ShinMenu = ({ nomLogo, Logout }) => {
+    const auth = useSelector(state => state.auth)
+    const { user, isLogged, isAdmin } = auth
 
     const classes = useStyles();
     const [showMenu, setShowMenu] = useState(false);
@@ -73,7 +77,7 @@ const ShinMenu = ({ nomLogo, user, Logout }) => {
 
     const handelClick = () => {
         setShowMenu(!showMenu);
-        setAnimeEnter(true); 
+        setAnimeEnter(true);
         console.log('open')
     }
 
@@ -90,6 +94,7 @@ const ShinMenu = ({ nomLogo, user, Logout }) => {
     return (
         <React.Fragment>
 
+
             <div className={classes.menuEtTitre}>
                 <IconButton onClick={handelClick} >
                     <MenuIcon fontSize="large" />
@@ -102,13 +107,9 @@ const ShinMenu = ({ nomLogo, user, Logout }) => {
             {showMenu && <Paper square={true} className={classes.voile} onClick={handelClose}></Paper>}
 
             {showMenu &&
-
-                <Slide in={animeEnter} direction='right' mountOnEnter unmountOnExit   >
-
-
+                <Slide Slide in={animeEnter} direction='right' mountOnEnter unmountOnExit   >
                     <Paper className={classes.menu} elevation={3}>
                         <div>
-
                             <div style={{ display: "flex", justifyContent: "space-between", padding: "0px 20px" }}>
                                 <h2> MENU </h2>
                                 <IconButton onClick={
@@ -124,32 +125,27 @@ const ShinMenu = ({ nomLogo, user, Logout }) => {
                                 <li> <a href='otherPages/AboutUs.html' className='lien'>About</a></li>
                                 <li><a href='otherPages/contact.html' className='lien'>Contact</a></li>
                                 <li><a href='otherPages/blog.html' className='lien'>Blog</a></li>
-
-                                {/* {!user.isAdmin ? <li><a href='/admin' className='lien'>Dashboard</a></li> : null} */}
-
                             </ul>
                         </div>
+
                         <Paper className={classes.paperBtnSign}>
-
-
-                            {user?.result ?
+                            {isLogged ?
                                 <Button onClick={Logout} style={{ backgroundColor: "black", color: 'white', width: '60%', fontSize: '15px', textTransform: 'none' }}>se Deconnecter</Button>
                                 :
                                 <BoutonSignUp nomClass='paperSignUpBtn' />
 
                             }
-
-
-
                         </Paper>
-
                     </Paper>
                 </Slide>
 
 
+
+
+
             }
 
-        </React.Fragment>
+        </React.Fragment >
 
     );
 
@@ -159,3 +155,38 @@ const ShinMenu = ({ nomLogo, user, Logout }) => {
 
 
 export default ShinMenu
+
+
+
+
+
+{/* { */ }
+{/* isAdmin ? <> */ }
+{/* <div style={{ display: "flex", justifyContent: "space-between", padding: "0px 10px" }}>
+                                    <h2> MENUE ADMIN </h2>
+                                    <IconButton onClick={
+                                        handelClose
+                                    }
+                                    >
+                                        <CloseIcon size="large" style={{ color: 'black' }} />
+                                    </IconButton>
+                                </div>
+
+                                    <ul >
+                                        <li><a href='otherPages/Home.html' className='lien' > Dashboard </a></li>
+                                        {/* <li> <a href='otherPages/AboutUs.html' className='lien'>About</a></li>
+                                        <li><a href='otherPages/contact.html' className='lien'>Contact</a></li>
+                                        <li><a href='otherPages/blog.html' className='lien'>Blog</a></li> */}
+{/* <li><a href='otherPages/blog.html' className='lien'>View-all-restaurants</a></li>
+                                        <li><a href='otherPages/blog.html' className='lien'>view-single-restaurants</a></li>
+                                        <li><a href='otherPages/blog.html' className='lien'>create restaurant</a></li>
+                                        <li><a href='otherPages/blog.html' className='lien'>update restaurant</a></li>
+                                        <li><a href='otherPages/blog.html' className='lien'>delete restaurant</a></li> */}
+{/* <li><a href='otherPages/blog.html' className='lien'> Profile  </a></li>
+                                        <li><a href='otherPages/blog.html' className='lien'> Nos partenaires</a></li> */}
+{/* </ul> */ }
+// {/* </> */ } * /}
+{/* : */ }
+
+
+{/* } */ }

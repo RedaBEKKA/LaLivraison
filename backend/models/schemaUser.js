@@ -11,7 +11,6 @@ const userSchema = mongoose.Schema({
     telephone: {
         type: String,
         required: true,
-        unique: true,
         minlength: 5,
         maxlength: 255,
     }, 
@@ -32,9 +31,9 @@ const userSchema = mongoose.Schema({
         minlength: 5,
         maxlength: 1024,
     },
-    isAdmin:{
-        type:Boolean
-    },
+    // isAdmin:{
+    //     type:Boolean
+    // },
     role :{
         type :Number,
         default : 0,

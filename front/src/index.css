@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
+  
+  
+
 }
 a{
   text-decoration: none;
@@ -21,3 +25,5 @@ code {
 
 
 @import url("../src/component/auth/auth.css");
+/* ----------------- Profile ------------------- */
+@import url("./component/profile/EditUser.css");

@@ -46,6 +46,16 @@
 }
 
 /* ------------- Forgot Password --------------- */
+.fg_pass{
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    margin-top: 60;
+}
+
 .fg_pass h2{
     color: #555;
     text-transform: uppercase;
@@ -77,6 +87,10 @@
     border-radius: 3px;
     margin-top: 15px;
 }
+.fg_pass_container {
+    width: '80%';
+}
 .container{
     margin-top:100px ;
 }
+

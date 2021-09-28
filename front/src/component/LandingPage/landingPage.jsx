@@ -9,6 +9,7 @@ import DownloadMobile from "../downloadMobile/DownloadMobile";
 import BarreDeRecherche from "../BarreDeRecherche/BarreRecherche";
 import Footer from "../footer/Footer";
 import {useDispatch, useSelector} from 'react-redux'
+import SideMenu from "../SideMenu/SideMenuAdmin";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -35,7 +36,8 @@ const useStyles = makeStyles((theme) => {
 });
 
 function LandingPage() {
-
+  const auth = useSelector(state => state.auth)
+  const { user, isLogged, isAdmin } = auth
   const classes = useStyles();
   return (
     <div style={{ minWidth: 350 }}>
@@ -50,7 +52,7 @@ function LandingPage() {
       </div>
 
       <div className="App">
-        <ShinBarreMenu />
+      <ShinBarreMenu />
         <AllServices />
         <SectionPartenaires />
 

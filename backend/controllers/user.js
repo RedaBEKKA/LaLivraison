@@ -24,7 +24,7 @@ const userController = {
     try {
       const telExistant = await Client.findOne({ telephone });
       if (telExistant)
-        return res.json({ message: "Numero de telephone deja utilisé" });
+        return res.json({ msg: "Numero de telephone deja utilisé" });
 
       if (! /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
         return res.status(400).json({ msg: "Invalid emails." })
@@ -71,7 +71,7 @@ const userController = {
         })
         res.json({
           status: "SUCCESS",
-          message: "félicitations inscription réussi ! Veuillez activer votre compte pour commencer",
+          msg: "félicitations inscription réussi ! Veuillez activer votre compte pour commencer",
 
 
         });
@@ -141,10 +141,14 @@ const userController = {
       }
       console.log(`refresh_token`, refresh_token)
       res.cookie('x-access-token', refresh_token, options)
+      //res.cookie('refreshtoken', refresh_token, options)
+      // res.body('refreshtoken', refresh_token, options)
 
 
       console.log(`userEmail`, userEmail)
       res.json({ msg: "Connexion réussie" })
+      console.log(`Connexion réussie`)
+
 
     } catch (error) {
       console.log(error);
@@ -152,10 +156,10 @@ const userController = {
   },
   getAccessToken: (req, res) => {
     try {
-      const rf_token = req.cookies['x-access-token'];
-      console.log(`rf_token`, rf_token)
+       const rf_token = req.cookies['x-access-token'];
+     // const rf_token = req.cookies.refreshtoken;
       if (!rf_token) return res.status(400).json({ msg: "no. token Please login now !" })
-
+      console.log(`rf_token`, rf_token)
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.status(400).json({ msg: "Please login now!" })
 
@@ -199,7 +203,7 @@ const userController = {
         })
         res.json({
           status: "SUCCESS",
-          message: "félicitations lien envoyer  ! Veuillez verfier votre email",
+          msg: "félicitations lien envoyer  ! Veuillez verfier votre email",
 
 
         });
@@ -224,7 +228,7 @@ const userController = {
 
       const passwordHash = await bcrypt.hash(motDePasse, 12)
       const token = req.headers['x-access-token']
-      console.log(`req params`, token)
+
 
       decodeData = jwt.verify(token, process.env.ACCESS_TOKEN)
       req.userId = decodeData?.id;
@@ -242,12 +246,12 @@ const userController = {
   getUserInfor: async (req, res) => {
     try {
       const token = req.headers['x-access-token']
-      console.log(`req params`, token)
-
+      //const token = req.headers.refreshtoken
+      // console.log(`token getUserInfo`, token)
       decodeData = jwt.verify(token, process.env.ACCESS_TOKEN)
       req.userId = decodeData?.id;
 
-      const user = await Client.findById(req.userId).select('-password')
+      const user = await Client.findById(req.userId).select('-motDePasse')
 
       res.json(user)
     } catch (err) {

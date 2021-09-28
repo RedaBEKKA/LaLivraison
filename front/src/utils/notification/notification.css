@@ -1,9 +1,14 @@
 .errMsg{
-    background: rgb(214, 10, 10);
+    background: rgba(214, 10, 10,1);
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px 10px;
     letter-spacing: 1.3px;
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    margin-bottom: 20px;
+
 }
 
 .successMsg{
@@ -12,4 +17,8 @@
     text-align: center;
     padding: 10px 0;
     letter-spacing: 1.3px;
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    margin-bottom: 20px;
 }
