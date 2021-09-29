@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import HeaderSideBarre from '../adminPage/HeaderSideBarre'
 import SideMenu from '../SideMenu/SideMenuAdmin'
+import logo2 from "../../assets/user.jpg";
+import axios from 'axios'
 
-function dashborad() {
+function Dashborad() {
+    const auth = useSelector(state => state.auth)
+    const { user, isAdmin } = auth
+    const [inactive, setInactive] = useState(true);
+
+    const handelOpen = ()=>{
+        setInactive(!inactive)
+    }
+    const handleLogout = async () => {
+        try {
+            await axios.get('/user/logout')
+            localStorage.removeItem('firstLogin')
+            window.location.href = "/";
+        } catch (err) {
+            window.location.href = "/";
+        }
+    }
+
     return (
         <div>
             <SideMenu />
-            <div className='logo-container' >
+            <HeaderSideBarre  logo2={logo2} handleLogout={handleLogout} user={user} handelOpen={handelOpen} inactive={inactive}/>
 
-                <p style={{ transform: 'translate(-5%,2%)' }} >BigNova<span className='span'>.Deliv</span ></p>
-
-            </div>
             <div className='container-title-dashborad'>
                 <h1>les Restaurentes</h1>
                 <div className='container-item'>
@@ -27,4 +45,4 @@ function dashborad() {
     )
 }
 
-export default dashborad
+export default Dashborad

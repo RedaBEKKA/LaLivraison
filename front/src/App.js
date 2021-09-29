@@ -17,7 +17,9 @@ import TestMenu from './component/test/TestMenu';
 import partenaires from './component/partenaires/partenaires';
 import Restaurants from './component/partenaires/Restaurants';
 import patisseries from './component/partenaires/patisseries';
-import dashborad from './component/dashborad/dashborad';
+import Dashborad from './component/dashborad/dashborad';
+import InfoProfile from './component/profile/InfoScreen/Info-profile';
+import UpDateProfile from './component/profile/UpdateProfile/updateProfile';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -35,7 +37,9 @@ function App() {
           <Route exact path='/connexion' component={isLogged ? NotFound : login}  />
           <Route exact path='/inscrire' component={isLogged ? NotFound : Register} />
           <Route exact path='/user/activate/:activation_token' component={ActivationCompte} />
-          <Route path="/dashborad" component={ isAdmin ?    dashborad : NotFound  } exact />
+          <Route path="/dashborad" component={ isAdmin ?    Dashborad : NotFound  } exact />
+          <Route path="/InfoProfile" component={ isAdmin ?    InfoProfile : NotFound  } exact />
+          <Route path="/modifierProfile" component={ isAdmin ?    UpDateProfile : NotFound  } exact />
           <Route path="/profile" component={isLogged && isAdmin ?    Profile : NotFound  } exact />
           <Route path="/testMenu" component={isLogged ?    TestMenu : NotFound  } exact />
           <Route path="/edit_user/:id" component={isAdmin ? EditUser : NotFound} exact />

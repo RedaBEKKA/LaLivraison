@@ -48,5 +48,6 @@
 /* sideBare */
 @import url("./component/SideMenu/sideMenue.css");
 /* dashborad */
-/* @import url('./component/dashborad/style.css'); */
 @import url("./component/dashborad/style.css");
+/* infoScreen */
+@import url("./component/profile/InfoScreen/style.css");
