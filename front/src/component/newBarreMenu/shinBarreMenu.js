@@ -19,7 +19,7 @@ import ShinMenu from "./shinMenu";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
-import { dispatchLogin, fetchUser, dispatchGetUser } from '../../redux/actions/authAction'
+import { dispatchLogin, fetchUser, dispatchGetUser ,} from '../../redux/actions/authAction'
 
 
 const useStyles = makeStyles((theme) => {
@@ -189,6 +189,19 @@ const ShinBarreMenu = ({ }) => {
     }
   }, [token, dispatch])
 
+  // useEffect(() => {
+  //   if (token) {
+  //     const getRestaurants = () => {
+  //       dispatch(dispatchLogin())
+  //       const res = fetchUser(token).then(res => {
+  //         dispatch(dispatchGetUser(res));
+  //       })
+  //       // console.log(`token 2 fetchUser`, token)
+  //       // console.log(`res res res res  `, res )        
+  //     }
+  //     getRestaurants()
+  //   }
+  // }, [token, dispatch])
 
   return (
     <AppBar

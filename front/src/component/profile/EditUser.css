@@ -146,6 +146,9 @@
     padding: 8px;
     min-width: 100px;
 }
+.customers tr{
+    cursor: pointer;
+}
 .customers tr:nth-child(even){
     background: #f2f2f2;
 }
@@ -282,6 +285,7 @@
     top:87px;
     transition: .3s ease-in;
     border-radius: 5px;
+    z-index: 3;
 }
 .container-header .right-box .big-box .solid-box.active{
     transition: .3s ease-in;

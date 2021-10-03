@@ -119,7 +119,7 @@ function InfoProfile() {
             <div className='Big-container'>
                 <div className="title-box">
                     <div className='image-box'>
-                        <img src={logo2}/>
+                        <img src={logo2} />
                     </div>
                     <div className='nameUser'>
                         {user.fullName}
@@ -127,13 +127,60 @@ function InfoProfile() {
                 </div>
                 <div className='body-container'>
                     <div className='col-left'>
-                        <div className='title-col-left'>
-                            A propos
+                        <div className='col-left-container'>
+                            <div className='title-col-left'>
+                                A propos
+                            </div>
+                            <div className='information-container'>
+                                <div>
+                                    name
+                                </div>
+                                <div>
+                                    {user.fullName}
+                                </div>
+                            </div>
+                            <div className='information-container'>
+                                <div className='title-item-box'>
+                                    telephone:
+                                </div>
+                                <div>
+                                    {user.telephone}
+                                </div>
+                            </div>
+                            <div className='information-container'>
+                                <div>
+                                    email:
+                                </div>
+                                <div>
+                                    {user.email}
+                                </div>
+                            </div>
+                            <div className='information-container'>
+                                <div>
+                                    role:
+                                </div>
+                                <div>
+                                    {user.role == 1 ? 'admin' : 'user'}
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-                    <div className='col-right'>
-
+                    <div className='col-left'>
+                            <div className='col-left-container'>
+                                <div className='title-col-left'>
+                                    confidentialté
+                                </div>
+                                <div className='information-container'>
+                                    <div>
+                                        name
+                                    </div>
+                                    <div>
+                                         ***********
+                                    </div>
+                                </div>
+                           
+                            </div>
                     </div>
 
                 </div>

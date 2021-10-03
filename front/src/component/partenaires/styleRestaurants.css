@@ -1,0 +1,110 @@
+.sliderAdd{
+    width: 600px;
+    background-color: rgb(248, 248, 248);
+    height: 90%;
+    position: absolute;
+    top: 91px;
+    right: 10px;
+    transition: .2s ease-in;
+}
+
+.sliderInfo{
+    width: 600px;
+    background-color: rgb(248, 248, 248);
+    height: 90%;
+    position: absolute;
+    top: 91px;
+    right: -10px;
+    transition: .2s ease-in;
+}
+
+.sliderAdd.active{
+    
+    right: -600px;
+    transition: .2s ease-in;
+
+}
+.sliderInfo.activeInfo{
+    
+    right: -600px;
+    transition: .2s ease-in;
+
+}
+
+.sliderInfo .box-circle-icon,
+.sliderAdd  .box-circle-icon{
+    margin-top: 15px;
+}
+.sliderInfo  .box-circle-icon .bi-x-circle,
+.sliderAdd  .box-circle-icon .bi-x-circle{
+    font-size: 25px ;
+    margin: 40px 20px;
+    cursor: pointer;
+}
+
+.sliderAdd .box-input{
+    padding: 20px;
+    height: 75%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sliderInfo .box-input {
+    padding: 20px;
+    height: 75%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.sliderInfo .box-input .image-box{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: rgb(10, 184, 184);
+    margin: 0px  20px 20px 0px;
+}
+.sliderInfo .box-input  .box-image-i{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+.sliderInfo .box-input .item-input{
+    display: flex;
+    border: none;
+    align-items: center;
+}
+.sliderInfo .box-input .item-input h4{
+    margin-left: 20px;
+}
+.sliderInfo .box-input .item-input h3{
+    color: #000;
+    font-size: 25px;
+}
+.sliderAdd .box-input .item-input{
+    margin: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border: none;
+}
+.box-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.box-title .box-btn {
+    background-color: #fff;
+    height: 35px;
+    margin-right: 30px;
+    width: 120px;
+    border: 1px solid rgb(77, 74, 69);
+    color: black;
+    font-size: 18px;
+    border-radius: 15px;
+    font-weight: 600;
+}

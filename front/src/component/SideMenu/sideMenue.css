@@ -48,6 +48,7 @@ body{
     box-sizing: border-box;
     padding: 30px 20px;
     transition: width .2s ease-in;
+    z-index: 3;
 }
 
 .side-menu.inactive{

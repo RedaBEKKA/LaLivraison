@@ -1,38 +1,39 @@
-.Big-container{
-    background-color: rgb(135, 148, 144);
+.Big-container {
+    background-color: rgb(233, 233, 233);
     height: 840px;
     width: 95.5%;
     margin-left: 85px;
     margin-top: 5px;
 }
-.Big-container .title-box{
+
+.Big-container .title-box {
     height: 10%;
-    background-color: antiquewhite;
     display: flex;
     align-items: center;
     padding-left: 60px;
 }
-.Big-container .title-box .image-box{
-    background-color: aquamarine;
+
+.Big-container .title-box .image-box {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 40px;
-
 }
-.Big-container .title-box .image-box img{
+
+.Big-container .title-box .image-box img {
     max-width: 50px;
     max-height: 50px;
 }
-.Big-container .title-box .nameUser{
+
+.Big-container .title-box .nameUser {
     color: black;
     font-size: 25px;
     font-weight: bold;
 }
+
 .Big-container .body-container {
     margin: 10px;
-    background-color: aquamarine;
     width: 99%;
     height: 80%;
     align-self: center;
@@ -41,21 +42,23 @@
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-.Big-container .body-container .col-left{
+
+.Big-container .body-container .col-left {
     width: 50%;
-    background-color: rgb(181, 226, 226);
     padding: 20px;
-    
-
+    position: relative;
 }
 
-.Big-container  .body-container .col-left .col-left-container{
-    border: 1px solid black ;
-    height: 80%;
-    width: 80%;
-
+.Big-container .body-container .col-left .col-left-container {
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    background-color: rgba(218, 218, 218, 0.589);
+    padding-left: 40px;
 }
-.Big-container .body-container .col-left .title-col-left{
+
+.Big-container .body-container .col-left .col-left-container .title-col-left {
     background-color: azure;
     height: 40px;
     width: 260px;
@@ -63,12 +66,19 @@
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    
+    position: absolute;
+    top: -2px;
+    left: 45px;
 }
-.Big-container .body-container .col-right{
+
+.Big-container .body-container .col-left .information-container {
+    width: 30%;
+    margin-top: 60px;
+    margin-left: 30px;
+}
+
+.Big-container .body-container .col-right {
     width: 50%;
     background-color: rgb(51, 195, 195);
     padding: 20px;
-
-    
 }

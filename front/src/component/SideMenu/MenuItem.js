@@ -9,7 +9,7 @@ import { NavLink, Link } from "react-router-dom";
 const MenuItem = (props) => {
     const { name, subMenus, iconClassName, onClick, to, exact } = props;
     const [expand, setExpand] = useState(false);
-console.log(subMenus)
+//console.log(subMenus)
     return (
         // <div className='item-menu'>
             <div onClick={props.onClick}>

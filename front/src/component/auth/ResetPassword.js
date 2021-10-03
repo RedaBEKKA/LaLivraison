@@ -33,7 +33,6 @@ function ResetPassword() {
         
         try {
             const res = await axios.post('/user/reset', {motDePasse}, {
-                // headers: {Authorization: token}
                 headers: {
                     'x-access-token': token
                 }
