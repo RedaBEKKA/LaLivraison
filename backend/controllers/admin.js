@@ -1,49 +1,46 @@
 const mongoose = require("mongoose");
 const admin = require("../models/orders");
 const Restaurants = require("../models/restaurants");
+const Orders = require("../models/orders");
 const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-const Admin = require('../middleware/admin')
-const { auth } = require('../middleware/auth')
-// router.post('/newRestaurant',
-// router.post('/ajouter', auth,
+
+
 const adminController = {
 
-    ajouterCmd: async (req, res) => {
+    ajouterOrders: async (req, res) => {
         console.log("ajouter une commande");
-        let { titre, nom, prix, stars, temps, type } = req.body;
-        titre,
-            nom,
+        let { nom, prix, type, stars, temps, Extra, restaurant, format } = req.body;
+
+        nom,
             prix,
             stars,
             temps,
-            type
+            type,
+            Extra,
+            restaurant,
+            format
 
+        if (nom == '' || prix == "" || stars == "" || temps == "" || type == "" || Extra == "" || restaurant == "" || format == "") {
 
-        if (titre == "" || nom == '' || prix == "" || stars == "" || temps == "" || type == "") {
             res.json({
                 status: "FAILED",
                 message: "Champs de saisie vides !",
             });
-        } else if (!/^[a-zA-Z ]*$/.test(titre)) {
-            res.json({
-                status: "FAILED",
-                message: "titre entré non valide",
-            });
+
         } else if (!/^[a-zA-Z ]*$/.test(nom)) {
             res.json({
                 status: "FAILED",
                 message: "nomCategory entré non valide",
             });
-        } else if (!/^[0-9 ]*$/.test(prix)) {
+        } else if (!/^[0-9]*$/.test(prix)) {
             res.json({
                 status: "FAILED",
                 message: "prix entré invalide",
             });
-        }
-        else if (!/^[0-9 ]*$/.test(stars)) {
+        } else if (!/^[0-9]*$/.test(stars)) {
             res.json({
                 status: "FAILED",
                 message: "stars entré invalide",
@@ -54,33 +51,55 @@ const adminController = {
                 message: "type entré invalide",
             });
 
-        } else if (!/^[0-9 ]*$/.test(temps)) {
+        } else if (!/^[a-zA-Z ]*$/.test(Extra)) {
+            res.json({
+                status: "FAILED",
+                message: "Extra entré invalide",
+            });
+
+        } 
+        // else if (!/^[a-zA-Z ]*$/.test(nomRestaurant)) {
+        //     res.json({
+        //         status: "FAILED",
+        //         message: "nomRestaurant entré invalide",
+        //     });
+
+        // } 
+        else if (!/^[0-9 ]*$/.test(temps)) {
             res.json({
                 status: "FAILED",
                 message: "temps entré invalide",
             });
 
-        }
+        } else if (!/^[a-zA-Z  ]*$/.test(format)) {
+            res.json({
+                status: "FAILED",
+                message: "format entré invalide",
+            });
 
+        }
         else {
-            admin.find({ titre })
+            admin.find({ nom })
                 .then((result) => {
                     if (result.length) {
                         // A user not exists
                         res.json({
                             status: "FAILED",
-                            message: "La Commandes avec titre fournis existe deja",
+                            message: "Le plat avec nom fournis existe deja",
                         });
                     }
                     else {
                         try {
                             const newAdmin = new admin({
-                                titre,
                                 nom,
                                 prix,
                                 stars,
                                 temps,
-                                type
+                                type,
+                                Extra,
+                                restaurant,
+                                format
+                    
 
                             });
 
@@ -89,7 +108,7 @@ const adminController = {
                                 .then((result) => {
                                     res.json({
                                         status: "SUCCESS",
-                                        message: "ajout réussie",
+                                        message: "creation de la commande réussie",
                                         data: result,
                                     });
                                 })
@@ -106,7 +125,7 @@ const adminController = {
                     console.log(err);
                     res.json({
                         status: "FAILED",
-                        message: "Une erreur s'est produite lors de la vérifier votre connection !",
+                        message: err,
                     });
                 });
 
@@ -116,9 +135,60 @@ const adminController = {
 
         }
     },
+    getAllOrders: async (req, res) => {
+        try {
+            const orders = await Orders.find()
+
+            res.json(orders)
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+     },
+    getOneOrder: async (req, res) => {
+        try {
+            // let _id = req.body
+            let _id = req.params.id
+            if (!_id) {
+                res.json({
+                    status: "FAILED",
+                    message: "restaurant n'existe pas ",
+                });
+            } else {
+                const orders = await Orders.findById(_id)
+
+                res.json({
+                    status: "success",
+                    orders,
+                });
+            }
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    deleteOrder: async (req, res) => {
+        try {
+            await Orders.findByIdAndDelete(req.params.id)
+
+            res.json({ msg: "Deleted Success!" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    updateOrder: async (req, res) => { 
+        try {
+            const { nom, prix, type, stars, temps, Extra, restaurant, format  } = req.body
+            const NewOrder = await Orders.findOneAndUpdate({ _id: req.params.id }, {
+                nom, prix, type, stars, temps, Extra, restaurant, format 
+            })
+
+            res.json({ msg: "Update Success!", NewOrder })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+     },
     ajouterResto: async (req, res) => {
-        let { nomRestaurant, description, siteweb, address, phone, registre, email, tva, img, speciality } = req.body;
-        nomRestaurant,
+        let { restaurant, description, siteweb, address, phone, registre, email, tva, img, speciality } = req.body;
+        restaurant,
             description,
             speciality,
             address,
@@ -129,12 +199,12 @@ const adminController = {
             siteweb,
             email
 
-        if (nomRestaurant == "" || description == '' || address == "" || phone == "" || registre == "" || tva == "" || speciality == '' || siteweb == '' || email == '') {
+        if (restaurant == "" || description == '' || address == "" || phone == "" || registre == "" || tva == "" || speciality == '' || siteweb == '' || email == '') {
             res.json({
                 status: "FAILED",
                 message: "Champs de saisie vides !",
             });
-        } else if (!/^([a-zA-Z]+[ ]?|[a-zA-Z]+['-]?[])+$/.test(nomRestaurant)) {
+        } else if (!/^([a-zA-Z]+[ ]?|[a-zA-Z]+['-]?[])+$/.test(restaurant)) {
             res.json({
                 status: "FAILED",
                 message: "titre entré non valide",
@@ -194,7 +264,7 @@ const adminController = {
                         else {
                             try {
                                 const newRestaurant = new Restaurants({
-                                    nomRestaurant,
+                                    restaurant,
                                     description,
                                     speciality,
                                     address,
@@ -249,11 +319,11 @@ const adminController = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    getOneRestaurant:async(req,res)=>{
+    getOneRestaurant: async (req, res) => {
         try {
-           // let _id = req.body
+            // let _id = req.body
             let _id = req.params.id
-            if (!_id){
+            if (!_id) {
                 res.json({
                     status: "FAILED",
                     message: "id restaurant est null ",
@@ -266,15 +336,30 @@ const adminController = {
                     Restaurant,
                 });
             }
-          } catch (err) {
+        } catch (err) {
             return res.status(500).json({ msg: err.message })
-          }
+        }
     },
-    deleteRestaurent: async (req,res) =>{
+    deleteRestaurent: async (req, res) => {
+        try {
+            await Restaurants.findByIdAndDelete(req.params.id)
 
+            res.json({ msg: "Deleted Success!" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
     },
-    updateRestaurent: async (req,res) =>{
+    updateRestaurent: async (req, res) => {
+        try {
+            const { restaurant, email, description, speciality, address, phone, registre, tva, img, siteweb } = req.body
+            const resto = await Restaurants.findOneAndUpdate({ _id: req.params.id }, {
+                restaurant, email, description, speciality, address, phone, registre, tva, img, siteweb
+            })
 
+            res.json({ msg: "Update Success!", resto })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
     }
 
 

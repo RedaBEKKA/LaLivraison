@@ -23,7 +23,7 @@ app.use(cookieParser())
 const PORT = process.env.PORT || 5000  ; 
 
 
-mongoose.connect( process.env.MONGODB_URL,  { useCreateIndex: true, useUnifiedTopology: true ,useNewUrlParser: true  }  ,(err)=>{
+mongoose.connect( process.env.MONGODB_URL,  { useCreateIndex: true, useUnifiedTopology: true ,useNewUrlParser: true ,useFindAndModify: false }  ,(err)=>{
     app.listen(PORT,(req,res)=>{console.log('listning to PORT:',PORT)}) ; 
 } ,);
 

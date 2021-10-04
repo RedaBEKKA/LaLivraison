@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { Double } = require('bson');
 
 const restaurants = mongoose.Schema({
-    nomRestaurant: {
+    restaurant: {
         type: String,
         required: true,
         minlength: 5,
@@ -49,7 +49,7 @@ const restaurants = mongoose.Schema({
         minlength: 5,
         maxlength: 1024,
     },
-   
+
     tva: {
         type: String,
         default: 0,
@@ -58,29 +58,30 @@ const restaurants = mongoose.Schema({
         type: String,
         default: '',
     },
-    siteweb:{
+    siteweb: {
         type: String,
         minlength: 5,
         maxlength: 1024,
     },
-    email:{
+    email: {                                                                                                                        
         type: String,
         minlength: 5,
         maxlength: 44,
-       
+
+    },
+    menue: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Commandes',
+        required:true
     }
+       
+    
 },
     {
         timestamps: true,
     }
 )
 
-restaurants.methods.isRegistre = function () {
-    maskNRC = /\d/, /\d/, ' ', /[a-zA-Z]{1}/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,'-',/\d/,/\d/,'/',/\d/,/\d/;
-
-    return maskNRC.test(registre);
-
-}
 
 const Restaurants = mongoose.model('Restaurants', restaurants)
 

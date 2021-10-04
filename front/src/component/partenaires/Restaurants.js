@@ -125,15 +125,15 @@ function Profile() {
                     id
                 }
             })
-                // .then(resp => {
-                //     console.log(resp.data);
-                //     setAdata(resp.data.Restaurant.tva)
-                //     console.log('resprespresp',resp)
-                // }
-                // )
+            // .then(resp => {
+            //     console.log(resp.data);
+            //     setAdata(resp.data.Restaurant.tva)
+            //     console.log('resprespresp',resp)
+            // }
+            // )
             console.log(`res`, res.data.Restaurant)
             setAdata(res.data)
-            console.log(`aData`, aData.Restaurant.email)
+           // console.log(`aData`, aData.Restaurant.email)
         }
 
     }
@@ -216,15 +216,14 @@ function Profile() {
                     <i class="bi bi-x-circle" onClick={() => { handelOpenInfoResto() }}></i>
                 </div>
 
-
-                <div className='box-input'>
+                {aData && <div className='box-input'>
                     <div className='box-image-i'>
                         <div>
                             <div className='item-input'>
                                 <h3>ID :</h3> <h4>  {aData.Restaurant._id}</h4>
                             </div>
                             <div className='item-input'>
-                                <h3>nom restaurant :</h3> <h4> {aData.Restaurant.nomRestaurant}</h4>
+                                <h3>nom restaurant :</h3> <h4> {aData.Restaurant.restaurant}</h4>
                             </div>
                         </div>
 
@@ -262,7 +261,8 @@ function Profile() {
 
 
 
-                </div>
+                </div>}
+
 
 
             </div>
@@ -298,7 +298,7 @@ function Profile() {
                                     restaurants.map(restaurant => (
                                         <tr key={restaurant._id} >
                                             <td>{restaurant._id}</td>
-                                            <td>{restaurant.nomRestaurant}</td>
+                                            <td>{restaurant.restaurant}</td>
                                             <td>{restaurant.speciality}</td>
                                             <td>{restaurant.email}</td>
                                             <td>{restaurant.phone}</td>

@@ -2,50 +2,61 @@ const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 
 const ordersSchema = mongoose.Schema({
-    titre: {
-        type: String,
-        required: true,
-        unique:true,
-        minlength: 5,
-        maxlength: 44,
-    },
+
     nom: {
         type: String,
         required: true,
         minlength: 5,
         maxlength: 44,
-        unique:false,
 
     },
-    type:{
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 44,
-        unique:false,
-
-    },
-    dateCreation:
-        Date,  //  ca ce fais automatiquement 
     prix: {
         type: Number,
         required: true,
         minlength: 3,
         maxlength: 4,
     },
-    stars:{
+    type: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 44,
+
+    },
+    dateCreation:
+        Date,  //  ca ce fais automatiquement 
+
+    stars: {
         type: Number,
         required: true,
         maxlength: 1,
     },
-    temps:{
+    temps: {
         maxlength: 2,
         type: Number,
 
+    },
+    Extra: {
+        type: String,
+        minlength: 5,
+        maxlength: 44,
+    },
+    restaurant: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Restaurants',
+        required: true,
+    },
+    format: {
+        type: String,
+        minlength: 2,
+        maxlength: 44,
     }
 })
 
-const OrdersModel = mongoose.model('Commandes', ordersSchema)
+// db.ordersSchema.getIndexes()
+
+
+const OrdersModel = mongoose.model('lesPlats', ordersSchema)
 
 
 module.exports = OrdersModel;
