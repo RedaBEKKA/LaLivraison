@@ -227,7 +227,7 @@ const ShinBarreMenu = ({ }) => {
 
 
           : (
-            <BoutonSignUp nomClass="signUpBtn" />
+            <BoutonSignUp nomClassName="signUpBtn" />
           )}
       </Toolbar>
     </AppBar>

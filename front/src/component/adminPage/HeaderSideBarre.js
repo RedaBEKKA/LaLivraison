@@ -18,7 +18,7 @@ function HeaderSideBarre({handleLogout,user,handelOpen,inactive}) {
                                 {user.fullName}
                             </div>
                             <div className='box-icon' onClick={() => {handelOpen()}}>
-                                <i class="bi bi-caret-down-fill"></i>
+                                <i classname="bi bi-caret-down-fill"></i>
                             </div>
                         </div>
                         {/* className='solid-box' */}
@@ -26,20 +26,20 @@ function HeaderSideBarre({handleLogout,user,handelOpen,inactive}) {
 
                             <Link className='item-box' to='/InfoProfile'>
                                 Mes Informations
-                                <i class="bi bi-info-circle-fill"> </i>
+                                <i classname="bi bi-info-circle-fill"> </i>
                             </Link>
 
 
                             <Link className='item-box' to='/modifierProfile'>
                                 Modifier profile
-                                <i class="bi bi-person-lines-fill"></i>
+                                <i classname="bi bi-person-lines-fill"></i>
 
                             </Link>
                             <Link className='item-box' onClick={()=>{
                                 handleLogout()
                             }}>
                                 Se deconnecter
-                                <i class="bi bi-box-arrow-right"></i>
+                                <i classname="bi bi-box-arrow-right"></i>
 
                             </Link>
                         </div>

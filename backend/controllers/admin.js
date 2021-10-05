@@ -57,7 +57,7 @@ const adminController = {
                 message: "Extra entré invalide",
             });
 
-        } 
+        }
         // else if (!/^[a-zA-Z ]*$/.test(nomRestaurant)) {
         //     res.json({
         //         status: "FAILED",
@@ -99,7 +99,7 @@ const adminController = {
                                 Extra,
                                 restaurant,
                                 format
-                    
+
 
                             });
 
@@ -143,7 +143,7 @@ const adminController = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-     },
+    },
     getOneOrder: async (req, res) => {
         try {
             // let _id = req.body
@@ -174,21 +174,21 @@ const adminController = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    updateOrder: async (req, res) => { 
+    updateOrder: async (req, res) => {
         try {
-            const { nom, prix, type, stars, temps, Extra, restaurant, format  } = req.body
+            const { nom, prix, type, stars, temps, Extra, restaurant, format } = req.body
             const NewOrder = await Orders.findOneAndUpdate({ _id: req.params.id }, {
-                nom, prix, type, stars, temps, Extra, restaurant, format 
+                nom, prix, type, stars, temps, Extra, restaurant, format
             })
 
             res.json({ msg: "Update Success!", NewOrder })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-     },
+    },
     ajouterResto: async (req, res) => {
-        let { restaurant, description, siteweb, address, phone, registre, email, tva, img, speciality } = req.body;
-        restaurant,
+        let { restaurantName, description, siteweb, address, phone, registre, email, tva, img, speciality,menue } = req.body;
+        restaurantName,
             description,
             speciality,
             address,
@@ -197,17 +197,18 @@ const adminController = {
             tva,
             img,
             siteweb,
-            email
+            email,
+            menue
 
-        if (restaurant == "" || description == '' || address == "" || phone == "" || registre == "" || tva == "" || speciality == '' || siteweb == '' || email == '') {
+        if (restaurantName == "" || description == '' || address == "" || phone == "" || registre == "" || tva == "" || speciality == '' || siteweb == '' || email == '') {
             res.json({
                 status: "FAILED",
                 message: "Champs de saisie vides !",
             });
-        } else if (!/^([a-zA-Z]+[ ]?|[a-zA-Z]+['-]?[])+$/.test(restaurant)) {
+        } else if (!/^([a-zA-Z]+[ ]?|[a-zA-Z]+['-]?[])+$/.test(restaurantName)) {
             res.json({
                 status: "FAILED",
-                message: "titre entré non valide",
+                message: "restaurantName entré non valide",
             });
 
         } else if (!/^([a-zA-Z]+[ ]?|[a-zA-Z]+['-]?[])+$/.test(description)) {
@@ -264,7 +265,7 @@ const adminController = {
                         else {
                             try {
                                 const newRestaurant = new Restaurants({
-                                    restaurant,
+                                    restaurantName,
                                     description,
                                     speciality,
                                     address,
@@ -312,9 +313,13 @@ const adminController = {
     },
     getAllRestaurants: async (req, res) => {
         try {
-            const restaurants = await Restaurants.find()
-
-            res.json(restaurants)
+            await Restaurants.find()
+            .populate('menue')
+            .exec()
+            .then(re =>{
+                res.json(re)
+            })
+            
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
@@ -329,12 +334,22 @@ const adminController = {
                     message: "id restaurant est null ",
                 });
             } else {
-                const Restaurant = await Restaurants.findById(_id)
+                await Restaurants.findById(_id)
+                    .populate('menue')
+                    .exec()
+                    .then(restaurant => {
+                        res.status(200).json({
+                            status: "success",
+                            count: restaurant.length,
+                            restaurant,
+                        })
 
-                res.json({
-                    status: "success",
-                    Restaurant,
-                });
+                    })
+
+                // res.json({
+
+                //     Restaurant,
+                // });
             }
         } catch (err) {
             return res.status(500).json({ msg: err.message })

@@ -18,10 +18,9 @@ const initialState = {
 }
 
 function Register() {
+
     const [user, setUser] = useState(initialState)
-
     const { fullName, email, telephone, motDePasse, cf_motDePasse, err, success } = user
-
     const handleChangeInput = e => {
         const { name, value } = e.target
         setUser({ ...user, [name]: value, err: '', success: '' })

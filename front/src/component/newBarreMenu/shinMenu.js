@@ -132,7 +132,7 @@ const ShinMenu = ({ nomLogo, Logout }) => {
                             {isLogged ?
                                 <Button onClick={Logout} style={{ backgroundColor: "black", color: 'white', width: '60%', fontSize: '15px', textTransform: 'none' }}>se Deconnecter</Button>
                                 :
-                                <BoutonSignUp nomClass='paperSignUpBtn' />
+                                <BoutonSignUp nomClassName='paperSignUpBtn' />
 
                             }
                         </Paper>

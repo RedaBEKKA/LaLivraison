@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { Double } = require('bson');
 
 const restaurants = mongoose.Schema({
-    restaurant: {
+    restaurantName: {
         type: String,
         required: true,
         minlength: 5,
@@ -71,8 +71,8 @@ const restaurants = mongoose.Schema({
     },
     menue: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Commandes',
-        required:true
+        ref:'lesPlats',
+        default:''
     }
        
     

@@ -17,25 +17,25 @@ export const menuItems = [
         name: "Dashboard",
         exact: true,
         to: "/dashborad",
-        iconClassName: "bi bi-speedometer2",
+        iconClass: "bi bi-speedometer2",
     },
     {
         name: "Profile",
         exact: true,
         to: "/profile",
-        iconClassName: "bi bi-person-square",
+        iconClass: "bi bi-person-square",
     },
     {
         name: "Nos partenaires",
         exact: true,
         to: '/profile',
-        iconClassName: "bi bi-award",
+        iconClass: "bi bi-award",
         subMenus: [
             { name: "Restaurants", to: "/partenaires/Restaurants" },
             { name: "pâtisseries", to: "/partenaires/pâtisseries" },
         ],
     },
-    { name: "A propos", to: `/apropos`, iconClassName: "bi bi-exclamation-circle" },
+    { name: "A propos", to: `/apropos`, iconClass: "bi bi-exclamation-circle" },
 
 ];
 
@@ -115,7 +115,7 @@ const SideMenu = (props) => {
                         exact={menuItem.exact}
                         to={menuItem.to}
                         subMenus={menuItem.subMenus || []}
-                        iconClassName={menuItem.iconClassName}
+                        iconClass={menuItem.iconClass}
                         onClick={(e) => {
                             if (inactive) {
                                 setInactive(false);
@@ -123,36 +123,6 @@ const SideMenu = (props) => {
                         }}
                     />
                 ))}
-
-                {/* <div className='container-item'>
-                    <a className="menu-item">
-                        <div className="menu-icon">
-                            <i class="bi bi-speedometer2"></i>
-                        </div>
-                        <span>Dashboard</span>
-                    </a>
-                </div> */}
-                {/* <MenuItem
-            name={"Content"}
-            subMenus={[{ name: "Courses" }, { name: "Videos" }]}
-          /> */}
-                {/* <div className='container-item'>
-                    <a className="menu-item">
-                        <div className="menu-icon">
-                            <i class="bi bi-person-square"></i>
-                        </div>
-                        <span>Profile</span>
-                    </a>
-                </div> */}
-                {/* <div className='container-item'>
-                    <a className="menu-item">
-                        <div className="menu-icon">
-                            <i class="bi bi-award"></i>
-                        </div>
-                        <span>Nos partenaires</span>
-                    </a>
-                </div> */}
-
             </div>
 
             <div className="side-menu-footer">
