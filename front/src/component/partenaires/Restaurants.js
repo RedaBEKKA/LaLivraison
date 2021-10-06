@@ -162,7 +162,7 @@ function Profile() {
         menue: id,
     }
     const [restaurantAdmin, setRestaurantAdmin] = useState(initialStateRestaurant)
-    const { restaurantName, email, phone, description, speciality, address, registre, tva, siteweb, sucssé, error, img,menue } = restaurantAdmin
+    const { restaurantName, email, phone, description, speciality, address, registre, tva, siteweb, sucssé, error, img, menue } = restaurantAdmin
 
     const handleChangeInput = e => {
         const value = e.target.value;
@@ -172,42 +172,9 @@ function Profile() {
 
     const handelAddResto = async e => {
         e.preventDefault()
-        // if (isEmpty(restaurant) || isEmpty(description) || isEmpty(speciality) || isEmpty(address) || isEmpty(registre) || isEmpty(tva) || isEmpty(siteweb)|| isEmpty(email))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "Merci de remplir tous les champs.", sucssé: '' })
-
-        // if (!isName(restaurantName))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "Le nom Restaurant est invalide.", sucssé: '' })
-
-        // if (!isEmail(email))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "E-mail invalide.", sucssé: '' })
-
-        // if (!isPhone(phone))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "Numéro téléphone invalide.", sucssé: '' })
-
-        // if (isLength(description))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "description doit être au moins de 6 caractères.", sucssé: '' })
-
-        // if (isLength(speciality))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "speciality doit être au moins de 6 caractères.", sucssé: '' })
-
-        // if (isLength(address))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "address doit être au moins de 6 caractères.", sucssé: '' })
-
-        // if (isLength(registre))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "registre doit être au moins de 6 caractères.", sucssé: '' })
-
-        // if (isLength(tva))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "tva doit être au moins de 6 caractères.", sucssé: '' })
-
-        // if (isLength(siteweb))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "siteweb doit être au moins de 6 caractères.", sucssé: '' })
-
-        // if (isLength(img))
-        //     return setRestaurantAdmin({ ...restaurantAdmin, error: "img doit être au moins de 6 caractères.", sucssé: '' })
-
         try {
             const res = await axios.post('/admin/newRestaurant',
-             { restaurantName, email, phone, description, speciality, address, registre, tva, siteweb, sucssé, error, img, menue },
+                { restaurantName, email, phone, description, speciality, address, registre, tva, siteweb, sucssé, error, img, menue },
                 {
                     headers: {
                         'x-access-token': token
@@ -215,9 +182,9 @@ function Profile() {
                 }
             )
             console.log(`res`, res)
-            if (res.data.status == 'FAILED'){
+            if (res.data.status == 'FAILED') {
                 setRestaurantAdmin({ ...restaurantAdmin, error: res.data.message, sucssé: '' })
-            } else{
+            } else {
                 setRestaurantAdmin({ ...restaurantAdmin, error: '', sucssé: res.data.message })
 
             }
@@ -231,11 +198,9 @@ function Profile() {
         <>
             <div className='menue'>
                 <SideMenu />
-
             </div>
 
             <HeaderSideBarre logo2={logo2} user={user} handelOpen={handelOpen} inactive={inactive} handleLogout={handleLogout} />
-            {/* <div className='sliderAdd'> */}
 
             <div className={`sliderAdd ${active ? "active" : ""}`}>
                 {error && showErrMsg(error)}
@@ -245,9 +210,7 @@ function Profile() {
                 </div>
                 {/* { restaurantName, email, phone, description, speciality, address, registre, tva, siteweb, sucssé, error, img } */}
                 <form className='box-input' onSubmit={handelAddResto}>
-                    <div>
-                        <button type="submit">modifier</button>
-                    </div>
+
 
 
                     <div className='item-input'>
@@ -300,16 +263,18 @@ function Profile() {
                             value={siteweb} name="siteweb" onChange={handleChangeInput} />
                     </div>
                     <div className='item-input' >
-                        <label htmlFor="siteweb">menue :</label>
-                        <input type="text" disabled placeholder={id} id="menue"
+                        <label htmlFor="menue">menue :</label>
+                        <input type="text" placeholder='_id menue' id="menue"
                             value={menue} name="menue" onChange={handleChangeInput} />
                     </div>
 
-
-                    <label htmlFor="img">Image :</label>
+                    {/* <label htmlFor="img">Image :</label>
                     <input type="file" placeholder=" img" id="img"
-                        value={img} name="img" onChange={handleChangeInput} />
+                        value={img} name="img" onChange={handleChangeInput} /> */}
 
+                    <div className='box-btn-container'>
+                        <button type="submit" className='box-btn'>Ajouter</button>
+                    </div>
                 </form>
 
 
@@ -319,6 +284,12 @@ function Profile() {
             <div className={`sliderInfo ${activeInfo ? "activeInfo" : ""}`}>
                 <div className='box-circle-icon'>
                     <i className="bi bi-x-circle" onClick={() => { handelOpenInfoResto() }}></i>
+
+                    <div className='container-Update'>
+                        <button className='box-btn'>modifier</button>
+                        <button className='box-btn'>supprimer</button>
+                    </div>
+
                 </div>
 
                 {aData &&

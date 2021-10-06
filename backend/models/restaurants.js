@@ -72,7 +72,6 @@ const restaurants = mongoose.Schema({
     menue: {
         type:mongoose.Schema.Types.ObjectId,
         ref:'lesPlats',
-        default:''
     }
        
     
